@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "fullName",
+    "email",
+    "address",
+    "createdAt"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "fullName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "address": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "line1",
+        "city",
+        "state",
+        "postalCode",
+        "country"
+      ],
+      "properties": {
+        "line1": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

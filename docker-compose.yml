@@ -1,0 +1,52 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: api_framework
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d api_framework"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  local-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    image: java-api-framework/local-api:latest
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "9876:9876"
+    environment:
+      SERVER_PORT: "9876"
+      SERVER_USER_STORE_TYPE: jdbc
+      DB_URL: jdbc:postgresql://postgres:5432/api_framework
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+
+  api-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.tests
+    image: java-api-framework/api-tests:latest
+    depends_on:
+      - local-api
+    environment:
+      API_BASE_URL: http://local-api:9876
+      API_START_EMBEDDED_SERVER: "false"
+      API_REQUEST_COUNT: "1000"
+      API_PARALLEL_THREADS: "25"
+      API_REPORTS_DIR: /workspace/docker-results/api-tests
+    volumes:
+      - ./docker-results:/workspace/docker-results
+
+volumes:
+  postgres-data:

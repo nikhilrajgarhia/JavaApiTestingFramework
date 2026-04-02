@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "name",
+      "email",
+      "status",
+      "createdAt"
+    ],
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "name": {
+        "type": "string"
+      },
+      "email": {
+        "type": "string"
+      },
+      "status": {
+        "type": "string"
+      },
+      "createdAt": {
+        "type": "string"
+      }
+    }
+  }
+}

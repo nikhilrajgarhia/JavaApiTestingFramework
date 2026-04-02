@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: api-tests
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: api-tests
+          image: java-api-framework/api-tests:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: API_BASE_URL
+              value: http://local-api:9876
+            - name: API_START_EMBEDDED_SERVER
+              value: "false"
+            - name: API_REQUEST_COUNT
+              value: "10000"
+            - name: API_PARALLEL_THREADS
+              value: "50"

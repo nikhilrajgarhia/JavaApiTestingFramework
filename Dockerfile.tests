@@ -1,0 +1,13 @@
+FROM maven:3.9.9-eclipse-temurin-17
+WORKDIR /workspace
+
+COPY pom.xml testng.xml ./
+COPY src ./src
+
+ENV API_BASE_URL=http://local-api:9876
+ENV API_START_EMBEDDED_SERVER=false
+ENV API_REQUEST_COUNT=1000
+ENV API_PARALLEL_THREADS=25
+ENV API_REPORTS_DIR=/workspace/docker-results/api-tests
+
+CMD ["sh", "-c", "mkdir -p ${API_REPORTS_DIR} && mvn -q test -Dapi.base.url=${API_BASE_URL} -Dapi.start.embedded.server=${API_START_EMBEDDED_SERVER} -Dapi.request.count=${API_REQUEST_COUNT} -Dapi.parallel.threads=${API_PARALLEL_THREADS} -Dapi.reports.dir=${API_REPORTS_DIR}"]

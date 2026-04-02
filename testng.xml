@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="RestApiFrameworkSuite" parallel="methods" thread-count="10" verbose="1">
+    <test name="SmokeAndLoadTests">
+        <classes>
+            <class name="com.example.framework.tests.AuthenticationFlowTest"/>
+            <class name="com.example.framework.tests.NegativeScenarioTest"/>
+            <class name="com.example.framework.tests.NestedPojoFlowTest"/>
+            <class name="com.example.framework.tests.UserApiFlowTest"/>
+            <class name="com.example.framework.tests.HighVolumeUserApiTest"/>
+        </classes>
+    </test>
+</suite>

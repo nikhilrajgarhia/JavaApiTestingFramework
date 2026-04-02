@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "customer",
+    "items",
+    "shippingAddress",
+    "paymentDetails",
+    "tags",
+    "summary",
+    "audit"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "customer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "customerId",
+        "fullName",
+        "email"
+      ],
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sku",
+          "productName",
+          "quantity",
+          "unitPrice"
+        ],
+        "properties": {
+          "sku": {
+            "type": "string"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer"
+          },
+          "unitPrice": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "shippingAddress": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "line1",
+        "city",
+        "state",
+        "postalCode",
+        "country"
+      ],
+      "properties": {
+        "line1": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentDetails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "cardLastFour",
+        "currency"
+      ],
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "cardLastFour": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "totalItems",
+        "totalAmount",
+        "currency"
+      ],
+      "properties": {
+        "totalItems": {
+          "type": "integer"
+        },
+        "totalAmount": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "createdAt",
+        "createdBy",
+        "sourceSystem"
+      ],
+      "properties": {
+        "createdAt": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "sourceSystem": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
